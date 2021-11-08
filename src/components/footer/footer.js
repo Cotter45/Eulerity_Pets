@@ -1,4 +1,4 @@
-import { Container, FootContainer, ListContainer, SmallSplitSection, } from "../../styled_components/components";
+import { FootContainer, ListContainer, SmallSplitSection, } from "../../styled_components/components";
 
 function Footer() {
 

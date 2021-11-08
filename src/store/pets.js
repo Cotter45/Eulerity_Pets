@@ -8,7 +8,12 @@ const get_pets_action = (pets) => {
 }
 
 export const get_pets = () => async (dispatch) => {
-    const response = await fetch('http://eulerity-hackathon.appspot.com/pets');
+    const response = await fetch('http://eulerity-hackathon.appspot.com/pets', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
     const pets = await response.json();
     dispatch(get_pets_action(pets));
     return pets;

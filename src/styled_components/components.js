@@ -1,10 +1,10 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 export const Nav = styled.nav`
   background-color: #fff;
   border-bottom: 1px solid #e6e6e6;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
   padding: 0 20px;
   height: 10vh;
@@ -14,6 +14,17 @@ export const Nav = styled.nav`
   right: 0;
   z-index: 10;
   width: 100%;
+
+  h2:hover {
+      cursor: pointer;
+      border-bottom: 1px solid #000;
+  }
+
+  @media (max-width: 750px) {
+      justify-content: space-between;
+      width: 90%;
+      border-radius: 5px;
+  }
 `;
 
 export const MainContainer = styled.main`
@@ -61,10 +72,14 @@ export const Container = styled.section`
 export const SplitSection = styled.section`
 display: flex;
 align-items: center;
-justify-content: center;
+justify-content: space-evenly;
 gap: 5vw;
 width: 100%;
 height: 40vh;
+
+p {
+    width: 50%;
+}
 `;
 
 export const SmallSplitSection = styled.section`
@@ -151,11 +166,14 @@ export const FootContainer = styled.footer`
 
     h1 {
         text-decoration: underline;
+        font-size: 2.5vw;
     }
 
     * {
         margin: 0;
     }
 `;
+
+
 
 

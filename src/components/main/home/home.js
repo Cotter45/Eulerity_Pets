@@ -3,19 +3,23 @@ import { useState, useEffect } from 'react';
 
 
 import { get_pets } from '../../../store/pets';
-import Loading from '../../../util/loading';
 import { Container, Image, MainContainer, SplitSection } from '../../../styled_components/components';
+import Loading from '../../../util/loading';
 import Footer from '../../footer/footer';
 
 function Home() {
     const dispatch = useDispatch();
 
+    // if fetch takes too long, or to prevent memory leak 
     const [isLoading, setIsLoading] = useState(true);
+    // if there is an error, set to true
     const [isError, setIsError] = useState(false);
+    // used for carousel of pets
     const [petIndex, setPetIndex] = useState(0);
 
     const pets = useSelector(state => state.Pets_Data.pets);
 
+    // on page load, fetch pets
     useEffect(() => {
         if (!isLoading) return;
         dispatch(get_pets())
@@ -23,11 +27,10 @@ function Home() {
                 setIsError(true);
                 setIsLoading(false);
             });
-        if (pets.length) {
-        }
         setIsLoading(false);
     }, [dispatch, isLoading, pets.length]);
 
+    // change petInterval every 5 seconds 
     useEffect(() => {
         if (pets.length === 0) return;
         const length = pets.length;
@@ -53,7 +56,7 @@ function Home() {
                         </p>
                     </SplitSection>
                     <Container>
-                        <h1>Meet: {pets[petIndex]?.title}</h1>
+                        <h1>Meet: <strong>{pets[petIndex]?.title}</strong></h1>
                         <p>
                             {pets[petIndex]?.description}
                         </p>
