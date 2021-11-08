@@ -1,8 +1,11 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 
+import Pets_Data from './pets.js';
+
 
 const rootReducer = combineReducers({
+  Pets_Data,
 });
 
 let enhancer;

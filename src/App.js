@@ -1,11 +1,14 @@
+import Main from "./components/main/main";
+import NavBar from "./components/nav_bar/nav_bar";
+import Routes from "./routes";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>React App</h1>
-      </header>
-    </div>
+    <>
+      <NavBar />
+      <Main />
+      <Routes />
+    </>
   );
 }
 

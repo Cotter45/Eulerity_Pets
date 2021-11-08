@@ -7,10 +7,10 @@ import { BrowserRouter } from 'react-router-dom';
 import { ModalProvider } from './context/Modal';
 import ReactDOM from 'react-dom';
 
-import './index.css';
 import configureStore from './store';
-
 import App from './App';
+
+import './index.css';
 
 
 const store = configureStore();
