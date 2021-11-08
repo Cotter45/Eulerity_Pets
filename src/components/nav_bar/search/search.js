@@ -1,50 +1,49 @@
-import styled from "styled-components";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+
+import { SearchContainer } from "../../../styled_components/components";
 
 
+function Search({ setParams, params, setResults, setSearch }) {
 
-function Search() {
+    const pets = useSelector(state => state.Pets_Data.pets);
     
-    const SearchContainer = styled.div`
-        width: 50%;
-        height: 60%;
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-        border: 1px solid gray;
-        border-radius: 5px;
-        box-shadow: 0px 0px 5px gray;
-
-        input {
-            padding: 15px;
-            width: 90%;
-            border: none;
-            background: none;
+    useEffect(() => {
+        if (params.length <= 1) {
+            setResults([]);
+            return;
         }
+        const debounce = setTimeout(() => {
+            // filter pets by name or description
+            const results = pets.filter(pet => {
+                return pet.title.toLowerCase().includes(params.toLowerCase()) || pet.description.toLowerCase().includes(params.toLowerCase());
+            });
 
-        input:focus {
-            outline: none;
-        }
-
-        button {
-            border: none;
-            background: none;
-            cursor: pointer;
-            width: 10%;
-            padding: 0;
-            margin: 0;
-
-            i {
-                color: gray;
+            // if there are results, set them or set message
+            if (results.length > 0) {
+                setResults(results);
+            } else {
+                setResults([{
+                    message: "No results found"
+                }]);
             }
-        }
-    `;
+        }, 500)
+
+        return () => clearTimeout(debounce);
+    }, [params, params.length, pets, setResults])
 
     return (
-        <SearchContainer className="search">
-            <input type="text" placeholder="Search by name or description" />
-                <button>
-                    <i className="fas fa-search fa-2x"></i>
-                </button>
+        <SearchContainer>
+            <input 
+                onChange={(e) => setParams(e.target.value)} 
+                value={params} 
+                type="text" 
+                placeholder="Search by name or description" 
+                onFocus={() => setSearch(true)}
+            />
+            <button>
+                <i className="fas fa-search fa-2x"></i>
+            </button>
         </SearchContainer>
     )
 }
