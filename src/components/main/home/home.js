@@ -1,9 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 
+
 import { get_pets } from '../../../store/pets';
 import Loading from '../../../util/loading';
-import { HeaderContainer, ImageCarousel, MainContainer, SplitArticle } from '../../../styled_components/components';
+import { Container, Image, MainContainer, SplitSection } from '../../../styled_components/components';
+import Footer from '../../footer/footer';
 
 function Home() {
     const dispatch = useDispatch();
@@ -21,8 +23,10 @@ function Home() {
                 setIsError(true);
                 setIsLoading(false);
             });
+        if (pets.length) {
+        }
         setIsLoading(false);
-    }, [dispatch, isLoading]);
+    }, [dispatch, isLoading, pets.length]);
 
     useEffect(() => {
         if (pets.length === 0) return;
@@ -36,19 +40,28 @@ function Home() {
     return (
         <MainContainer>
             {isLoading && !isError ? <Loading /> : !isLoading && isError ? <p>OOPS! Something went wrong...</p> :
-                <HeaderContainer>
+            <>
+                <Container>
                     <h1>Welcome to Sean's Pet Sanctuary!</h1>
-                    <SplitArticle>
-                        <ImageCarousel src={pets[petIndex]?.url} alt={pets[petIndex]?.name} />
+                    <SplitSection>
+                        <Image loading='eager' src={pets.length > 0 ? pets[petIndex]?.url : '/images/blur.jpeg'} alt={pets[petIndex]?.name} />
                         <p>
-                            Hi! My name is Sean, I'm a software developer based outside of Philadelphia and if there are 
+                            Hi! My name is Sean, I'm a software developer based outside of Philly and if there are 
                             two things I love in this world, it's making websites and ANIMALS! This website is a place to rescue these
                             beautiful beings from their cruel JSON cages. Hopefully we won't have to get Sarah McLachlan involved
                             and you can help us out!
                         </p>
-                    </SplitArticle>
-                </HeaderContainer>
+                    </SplitSection>
+                    <Container>
+                        <h1>Meet: {pets[petIndex]?.title}</h1>
+                        <p>
+                            {pets[petIndex]?.description}
+                        </p>
+                    </Container>
+                </Container>
+            </>
             }
+            <Footer />
         </MainContainer>
     )
 }

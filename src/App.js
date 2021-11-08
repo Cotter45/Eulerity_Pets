@@ -1,4 +1,4 @@
-import Main from "./components/main/main";
+import Footer from "./components/footer/footer";
 import NavBar from "./components/nav_bar/nav_bar";
 import Routes from "./routes";
 
