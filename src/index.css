@@ -49,6 +49,10 @@ select:focus {
   outline: none;
 }
 
+p {
+  text-indent: 25px;
+}
+
 .loading {
   position: relative;
   top: 25vh;

@@ -6,7 +6,6 @@ function App() {
   return (
     <>
       <NavBar />
-      <Main />
       <Routes />
     </>
   );

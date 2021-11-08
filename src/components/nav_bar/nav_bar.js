@@ -1,17 +1,17 @@
 
 
-import { Nav_Bar } from "../../styled_components/components";
+import { Nav } from "../../styled_components/components";
 
 function NavBar() {
 
     return (
-        <Nav_Bar>
+        <Nav>
             <h3>Nav Title</h3>
             <div>Search bar</div>
             <section>
                 router links
             </section>
-        </Nav_Bar>
+        </Nav>
     )
 }
 
