@@ -19,6 +19,10 @@
   background-color: rgba(0, 0, 0, 0.7);
 }
 
+#modal-background:hover {
+  cursor: pointer;
+}
+
 #modal-content {
   position: absolute;
   background-color:white;
@@ -26,4 +30,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 25px;
+  border-radius: 5px;
 }
