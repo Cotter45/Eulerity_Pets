@@ -2,9 +2,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useDrop } from 'react-dnd';
 import update from 'immutability-helper';
-import { saveAs } from 'file-saver';
 import { useHistory } from 'react-router-dom';
-
+import { saveAs } from 'file-saver';
 
 import { SplitSection, SmallSplitSection, ColGrid, MainDragnDropContainer, ButtonConainer, Button } from '../../../styled_components/components';
 import PetCard from './pet_card';
@@ -34,6 +33,7 @@ function Rescue() {
         setRescues(pets.filter(pet => pet.upForRescue))
     }, [nextTimers.length, pets, rescues.length]);
 
+    // effect to make the reminder disappear after 5 seconds
     useEffect(() => {
         if (!reminder) return;
 
@@ -44,6 +44,7 @@ function Rescue() {
         return () => clearTimeout(timer);
     }, [reminder]);
     
+    // effect to make the notice disappear after 5 seconds
     useEffect(() => {
         if (!notice) return;
 
@@ -117,7 +118,7 @@ function Rescue() {
     function download(pets) {
         if (pets.length === 0) return setReminder(true);
         pets.forEach(pet => {
-            // saveAs(pet.url, pet.title + '.jpg'); 
+            saveAs(pet.url, pet.title + '.jpg'); 
             if (pet) {
                 setNextTimers(nextTimers.filter(timer => timer.title !== pet.title));
                 setRescues(rescues.filter(rescue => rescue.title !== pet.title));

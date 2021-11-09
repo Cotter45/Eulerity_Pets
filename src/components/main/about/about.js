@@ -1,5 +1,5 @@
 import * as Fireworks from 'fireworks-canvas';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { MainContainer, Overlay } from "../../../styled_components/components";
 import Footer from '../../footer/footer';
@@ -7,6 +7,10 @@ import Footer from '../../footer/footer';
 function About() {
 
 
+    // cool package I found that overlays a fireworks display 
+    // with the canvas. I though about doing this manually because 
+    // I loved the little threejs block animation on your home page but for lack 
+    // of time I figured why not, just a little spice
     useEffect(() => {
 
         const container = document.getElementById('hooray');

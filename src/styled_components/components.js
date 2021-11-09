@@ -214,7 +214,6 @@ export const Container = styled.section`
     justify-content: center;
     width: 75%;
     height: 100%;
-    // max-height: 100%;
     background-color: rgba(255, 255, 255, 0.6);
     padding: 20px;;
     border-radius: 5px;

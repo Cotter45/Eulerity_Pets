@@ -1,5 +1,5 @@
 import { useDrag, useDrop } from 'react-dnd';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
 
 import { Card } from "../../../styled_components/components";
 import PetModal from './pet_modal';
@@ -68,7 +68,7 @@ function PetCard({ pet, index, moveCard, rescue, nextTimers, setNextTimers, resc
                     setNextTimers={setNextTimers}
                     rescues={rescues}
                     setRescues={setRescues}
-                    />
+                />
             )}
         </Card>
     )

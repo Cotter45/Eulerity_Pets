@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 
 import { Container, Image, MainContainer, SplitSection } from '../../../styled_components/components';
-import Footer from '../../footer/footer';
 
 function Home() {
     const history = useHistory();
