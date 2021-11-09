@@ -118,9 +118,14 @@ export const LinksContainer = styled.section`
 
     input {
         padding: 15px;
-        width: 90%;
+        width: 80%;
+        height: 100%;
         border: none;
         background: none;
+
+        ::placeholder {
+            color: black;
+        }
     }
 
     input:focus {
@@ -151,9 +156,6 @@ export const LinksContainer = styled.section`
             color: black;
         }
         
-        * {
-            color: white;
-        }
     }
 `;
 
@@ -288,8 +290,9 @@ export const SplitSection = styled.section`
         }
 
         p {
-            width: 100%;
+            width: 40%;
             line-height: 1.5;
+            font-size: 1vh;
         }
     }
     
@@ -607,6 +610,10 @@ export const Button = styled.button`
         border-color: #f6b93b !important;
         transition: all 0.4s ease 0s;
     }
+
+    @media (max-width: 768px) {
+        font-size: 1.2vh;
+    }
 `;
 
 export const NavButton = styled.button`
@@ -626,6 +633,10 @@ export const NavButton = styled.button`
         background: #f6b93b;
         border-color: #f6b93b !important;
         transition: all 0.4s ease 0s;
+    }
+
+    @media (max-width: 768px) {
+        font-size: 1.2vh;
     }
 `;
 
