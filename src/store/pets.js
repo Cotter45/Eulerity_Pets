@@ -61,8 +61,8 @@ export default function Pets_Data(state = initialState, action) {
             if (pet) pet.upForRescue = true;
             return { ...state };
         case SAVE_PET:
-            state.pets.filter(pet => pet.title !== action.payload.title);
-            return { ...state };
+            const newPets = state.pets.filter(pet => pet.title !== action.payload.title);
+            return { pets : newPets };
         default:
             return state;
     }

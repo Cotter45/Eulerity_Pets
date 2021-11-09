@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useDrop } from 'react-dnd';
 import update from 'immutability-helper';
 import { saveAs } from 'file-saver';
+import { useHistory } from 'react-router-dom';
 
 
 import { SplitSection, SmallSplitSection, ColGrid, MainDragnDropContainer, ButtonConainer, Button } from '../../../styled_components/components';
@@ -11,6 +12,7 @@ import { rescue_pet, save_pet } from '../../../store/pets';
 
 function Rescue() {
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const pets = useSelector(state => state.Pets_Data.pets);
 
@@ -115,7 +117,7 @@ function Rescue() {
     function download(pets) {
         if (pets.length === 0) return setReminder(true);
         pets.forEach(pet => {
-            saveAs(pet.url, pet.title + '.jpg'); 
+            // saveAs(pet.url, pet.title + '.jpg'); 
             if (pet) {
                 setNextTimers(nextTimers.filter(timer => timer.title !== pet.title));
                 setRescues(rescues.filter(rescue => rescue.title !== pet.title));
@@ -137,7 +139,10 @@ function Rescue() {
         <MainDragnDropContainer>
             <h2>Drag and drop to queue the rescue!</h2>
             <ButtonConainer>
-                <Button>Rescue All</Button>
+                <Button onClick={() => {
+                    download(petsList);
+                    history.push('/about');
+                }}>Rescue All</Button>
                 <Button onClick={sorryGuys}>Not Today...</Button>
             </ButtonConainer>
             <SmallSplitSection>

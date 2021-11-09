@@ -21,7 +21,7 @@ export const Nav = styled.nav`
   top: 0;
   left: 0;
   right: 0;
-  z-index: 10;
+  z-index: 100;
   width: 100%;
   max-width: 1400px;
   border-radius: 5px;
@@ -64,6 +64,7 @@ export const MenuContainer = styled.section`
     position: fixed;
     right: 0;
     top: 8vh;
+    z-index: 101;
     width: 150px;
     background-color: white;
     border-radius: 5px;
@@ -82,17 +83,26 @@ export const LinksContainer = styled.section`
     height: 100%;
     gap: 15px;
 
-    .navlink {
+    a {
+        font-size: 1vh;
+        color: #494949 !important;
+        text-transform: uppercase;
         text-decoration: none;
-        color: black;
+        background: #ffffff;
+        padding: 20px;
+        border: 4px solid #494949 !important;
+        display: inline-block;
+        transition: all 0.4s ease 0s;
+
+        &:hover {
+            cursor: pointer;
+            color: #ffffff !important;
+            background: #f6b93b;
+            border-color: #f6b93b !important;
+            transition: all 0.4s ease 0s;
+        }
     }
 
-    .navlink:hover {
-        border: 1px solid lightgray;
-        box-shadow: 0 0 10px white;
-        padding: 5px;
-        border-radius: 5px;
-    }
 `;
 
  export const SearchContainer = styled.div`
@@ -104,6 +114,7 @@ export const LinksContainer = styled.section`
     border: 1px solid gray;
     border-radius: 5px;
     box-shadow: 0 0 10px white;
+    z-index: 101;
 
     input {
         padding: 15px;
@@ -155,6 +166,8 @@ export const ResultsContainer = styled.div`
     justify-content: center;
     position: relative
     background-color: white;
+    z-index: 101;
+    background-color: rgba(255, 255, 255, 1);
 
     button {
         font-size: 1vh;
@@ -386,6 +399,7 @@ export const FootContainer = styled.footer`
     font-size: 1.2vw;
     position: fixed;
     bottom: 0;
+    z-index: 100;
     box-shadow: 0 0 10px white;
 
     h1 {
@@ -616,6 +630,42 @@ export const NavButton = styled.button`
     }
 `;
 
+export const Overlay = styled.section`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    height: 80%;
+    background: none;
+    position: absolute;
+    top: 10vh;
+    left: 10vw;
+    z-index: 100;
+    gap: 2vh;
+
+    * {
+        margin: 0;
+    }
+
+    p {
+        width: 60%;
+        text-align: left;
+    }
+
+    @media (max-width: 768px) {
+        width: 100%;
+        height: 80%;
+        top: 5vh;
+        left: 0vw;
+        z-index: 100;
+        text-align: center;
+
+        p {
+            width: 80%;
+        }
+    }
+`;
 
 
 
