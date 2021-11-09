@@ -1,14 +1,11 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 
-
-import { get_pets } from '../../../store/pets';
 import { Container, Image, MainContainer, SplitSection } from '../../../styled_components/components';
 import Footer from '../../footer/footer';
 
 function Home() {
-    const dispatch = useDispatch();
     const history = useHistory();
     
     // used for carousel of pets

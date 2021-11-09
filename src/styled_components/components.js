@@ -210,6 +210,8 @@ export const SmallSplitSection = styled.section`
     justify-content: space-evenly;
     gap: 2vw;
     width: 100%;
+    border-radius: 5px;
+    max-height: 75vh;
 
     p {
         font-size: 2vh;
@@ -353,9 +355,56 @@ export const ColDiv = styled.div`
     align-items: center;
     justify-content: center;
     width: 60%;
-    height: fit-content;
+    height: 100%;
+    max-height: 60vh;
     gap: 1vh;
     padding: 10px;
+    border-radius: 5px;
+
+    img {
+        height: 100%;
+        width: 100%;
+        border-radius: 5px;
+    }
+
+    `;
+    
+    export const ColGrid = styled.section`
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1vh;
+    width: 100%;
+    height: 60vh;
+    overflow-y: scroll;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.6);
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
+`;
+
+export const Card = styled.section`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    height: 25vh;
+    padding: 10px;
+
+    img {
+        width: 100%;
+        max-height: 100%;
+        border-radius: 5px;
+    }
+
+    &:hover {
+        cursor: pointer;
+        border: 1px solid gray;
+        box-shadow: 0 0 10px gray;
+        border-radius: 5px;
+    }
 `;
 
 
