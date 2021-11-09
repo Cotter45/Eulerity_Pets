@@ -244,11 +244,8 @@ export const SplitSection = styled.section`
     }
 
     @media (max-width: 768px) {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
         width: 100%;
-        height: 100%;
+        height: 60%;
         gap: 3vw;
 
         img {
@@ -430,7 +427,7 @@ export const ColDiv = styled.div`
 
     `;
     
-    export const ColGrid = styled.section`
+export const ColGrid = styled.section`
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1vh;
@@ -443,6 +440,18 @@ export const ColDiv = styled.div`
 
     ::-webkit-scrollbar {
         display: none;
+    }
+
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        gap: 1vh;
+        width: 80%;
+        height: 100%;
+        overflow-y: scroll;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.6);
     }
 `;
 
@@ -480,6 +489,31 @@ export const Card = styled.section`
         box-shadow: 0 0 10px gray;
         border-radius: 5px;
     }
+
+    @media (max-width: 768px) {
+        width: 80%;
+        height: fit-content;
+        padding: 0;
+        border: none;
+
+        img {
+            width: 100%;
+            max-height: 100%;
+            border-radius: 5px;
+        }
+
+        div {
+            display: block;
+            position: absolute;
+            z-index: 1;
+            width: 100%;
+        }
+
+        p {
+            padding: 0;
+            margin: 0;
+        }
+    }
 `;
 
 export const Overlay = styled.section`
@@ -497,12 +531,16 @@ export const MainDragnDropContainer = styled.main`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     width: 100%;
     height: 100%;
     gap: 1vh;
     padding: 10px;
     border-radius: 5px;
+
+    @media (max-width: 768px) {
+        height: 85vh;
+    }
 `;
 
 export const ButtonConainer = styled.div`
