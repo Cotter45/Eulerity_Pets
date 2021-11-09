@@ -56,7 +56,7 @@ function Home() {
                         </p>
                     </SplitSection>
                     <Container>
-                        <h1>Meet: <strong>{pets[petIndex]?.title}</strong></h1>
+                        <h1>Hello, {pets[petIndex]?.title}</h1>
                         <p>
                             {pets[petIndex]?.description}
                         </p>

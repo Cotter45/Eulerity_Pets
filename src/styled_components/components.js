@@ -6,10 +6,11 @@ export const NavContainer = styled.section`
     justify-content: center;
     align-items: center;
     width: 100%;
+    box-shadow: 0 0 10px white;
 `;
 
 export const Nav = styled.nav`
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.2);
   border-bottom: 1px solid #e6e6e6;
   display: flex;
   justify-content: space-around;
@@ -25,11 +26,15 @@ export const Nav = styled.nav`
   max-width: 1400px;
   border-radius: 5px;
 
+  h2 {
+      padding: 5px;
+  }
+
   h2:hover {
       cursor: pointer;
-      border: 1px solid gray;
-      box-shadow: 0 0 10px gray;
-      padding:
+      border: 1px solid lightgray;
+      box-shadow: 0 0 10px white;
+      border-radius: 5px;
   }
 
   @media (max-width: 750px) {
@@ -37,6 +42,88 @@ export const Nav = styled.nav`
       width: 90%;
       border-radius: 5px;
   }
+`;
+
+export const LinksContainer = styled.section`
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 20%;
+    height: 100%;
+    gap: 15px;
+
+    .navlink {
+        text-decoration: none;
+        color: black;
+    }
+
+    .navlink:hover {
+        border: 1px solid lightgray;
+        box-shadow: 0 0 10px white;
+        padding: 5px;
+        border-radius: 5px;
+    }
+`;
+
+ export const SearchContainer = styled.div`
+        width: 50%;
+        height: 50%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        border: 1px solid gray;
+        border-radius: 5px;
+        box-shadow: 0 0 10px white;
+
+        input {
+            padding: 15px;
+            width: 90%;
+            border: none;
+            background: none;
+        }
+
+        input:focus {
+            outline: none;
+        }
+
+        button {
+            border: none;
+            background: none;
+            cursor: pointer;
+            width: 10%;
+            padding: 0;
+            margin: 0;
+
+            i {
+                color: gray;
+            }
+        }
+`;
+
+export const ResultsContainer = styled.div`
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative
+    background-color: white;
+`;
+
+export const SearchResult = styled.div`
+    width: 80%;
+    height: fit-content;
+    display: flex;
+    gap: 10px;
+    padding: 5px;
+    
+    &:hover {
+        cursor: pointer;
+        border: 1px solid gray;
+        box-shadow: 0 0 10px white;
+        border-radius: 5px;
+    }
 `;
 
 export const MainContainer = styled.main`
@@ -80,6 +167,10 @@ export const Container = styled.section`
     h2 {
         text-decoration: underline;
     }
+    
+    h1 {
+        font-size: 3vh;
+    }
 
     @media (max-width: 768px) {
         font-size: 1.2vh;
@@ -88,26 +179,27 @@ export const Container = styled.section`
 
 
 export const SplitSection = styled.section`
-display: flex;
-align-items: center;
-justify-content: space-evenly;
-gap: 5vw;
-width: 100%;
-height: 40vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 5vw;
+    width: 100%;
+    height: 40vh;
 
-p {
-    width: 50%;
-}
+    p {
+        width: 50%;
+        // font-size: 1.8vh;
+    }
 `;
 
 export const SmallSplitSection = styled.section`
-width: 100%;
-height: fit-content;
-display: flex;
-align-items: center;
-justify-content: center;
-gap: 1vw;
-width: 100%;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1vw;
+    width: 100%;
 `;
 
 export const ListContainer = styled.article`
@@ -170,7 +262,7 @@ export const Image = styled.img`
 `;
 
 export const FootContainer = styled.footer`
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.2);
     border-radius: 5px;
     width: 100%;
     max-width: 1400px;
@@ -181,7 +273,7 @@ export const FootContainer = styled.footer`
     font-size: 1.2vw;
     position: fixed;
     bottom: 0;
-    box-shadow: 10px 5px 10px gray;
+    box-shadow: 0 0 10px white;
 
     h1 {
         text-decoration: underline;
@@ -193,72 +285,14 @@ export const FootContainer = styled.footer`
     }
 `;
 
- export const SearchContainer = styled.div`
-        width: 50%;
-        height: 50%;
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-        border: 1px solid gray;
-        border-radius: 5px;
-        box-shadow: 0px 0px 5px gray;
 
-        input {
-            padding: 15px;
-            width: 90%;
-            border: none;
-            background: none;
-        }
-
-        input:focus {
-            outline: none;
-        }
-
-        button {
-            border: none;
-            background: none;
-            cursor: pointer;
-            width: 10%;
-            padding: 0;
-            margin: 0;
-
-            i {
-                color: gray;
-            }
-        }
-`;
-
-export const ResultsContainer = styled.div`
-    width: 100%;
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative
-    background-color: white;
-`;
-
-export const SearchResult = styled.div`
-    width: 80%;
-    height: fit-content;
-    display: flex;
-    padding: 5px;
-    
-    &:hover {
-        cursor: pointer;
-        border: 1px solid gray;
-        box-shadow: 0 0 10px gray;
-        border-radius: 5px;
-    }
-`;
 
 export const FlexDiv = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 80%;
-    height: fit-content;
+    height: 100%;
     gap: 1vh;
     padding: 10px;
 
@@ -277,6 +311,30 @@ export const FlexDiv = styled.div`
         box-shadow: 0 0 10px gray;
         border-radius: 5px;
     }
+
+    img {
+        height: 40%;
+        width: 40%;
+        position: sticky;
+        
+    }
+
+    @media (max-width: 768px) {
+        img {
+            display: none;
+        }
+    }
+`;
+
+export const ColDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    height: fit-content;
+    gap: 1vh;
+    padding: 10px;
 `;
 
 
