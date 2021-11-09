@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { SearchContainer } from "../../../styled_components/components";
 
 
-function Search({ setParams, params, setResults, setSearch }) {
+function Search({ setParams, params, setResults, setSearch, size }) {
 
     const pets = useSelector(state => state.Pets_Data.pets);
     
@@ -39,7 +39,9 @@ function Search({ setParams, params, setResults, setSearch }) {
                 value={params} 
                 type="text" 
                 placeholder="Search by name or description" 
-                onFocus={() => setSearch(true)}
+                onFocus={() => {
+                    if (size.width > 750) setSearch(true)
+                }}
             />
             <button>
                 <i className="fas fa-search fa-2x"></i>

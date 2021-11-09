@@ -2,7 +2,7 @@ import { useHistory, NavLink } from "react-router-dom";
 import { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 
-import { FlexDiv, LinksContainer, Nav, NavContainer, ResultsContainer, SearchResult } from "../../styled_components/components";
+import { Button, ButtonConainer, FlexDiv, LinksContainer, MenuContainer, Nav, NavButton, NavContainer, ResultsContainer, SearchResult } from "../../styled_components/components";
 import Search from "./search/search";
 import useWindowSize from "../../util/window-size";
 
@@ -17,6 +17,8 @@ function NavBar() {
     const [results, setResults] = useState([]);
     // bring up the dropdown when focus is on the search input
     const [search, setSearch] = useState(false);
+    // toggle the mobile menu dropdown
+    const [viewMenu, setViewMenu] = useState(false);
 
 
     return (
@@ -30,6 +32,7 @@ function NavBar() {
                             params={params} 
                             setParams={setParams} 
                             setResults={setResults} 
+                            size={size}
                         />
                         <LinksContainer>
                             <NavLink className='navlink' activeClassName='active' to="/about">About</NavLink>
@@ -38,17 +41,39 @@ function NavBar() {
                     </>
                 )}
                 {size.width < 750 && (
-                    <h2>Menu</h2>
+                    <ButtonConainer>
+                        <Button onClick={() => setViewMenu(!viewMenu)}><i className="fas fa-bars"></i></Button>
+                    </ButtonConainer>
                 )}
             </Nav>
+            {viewMenu && (
+                <MenuContainer>
+                    <NavButton 
+                        onClick={() => {
+                            setViewMenu(false);
+                            setSearch(!search);
+                    }}>Search</NavButton>
+                    <NavButton onClick={() => history.push('/about')}>About</NavButton>
+                    <NavButton onClick={() => history.push('/rescue')}>Rescue</NavButton>
+                </MenuContainer>
+            )}
             {search && (
                 <ResultsContainer>
+                    {size.width < 750 && (
+                        <Search 
+                            setSearch={setSearch} 
+                            params={params} 
+                            setParams={setParams} 
+                            setResults={setResults}
+                            size={size}
+                        />
+                    )}
                     <FlexDiv>
                         <h2>Search Results</h2>
-                        <button onClick={() => {
+                        <Button onClick={() => {
                             setParams('');
                             setSearch(false);
-                        }}><i className="fas fa-times fa-2x"></i></button>
+                        }}><i className="fas fa-times fa-2x"></i></Button>
                     </FlexDiv>
                     {results.length > 0 && results.map((result, index) => (
                         <SearchResult

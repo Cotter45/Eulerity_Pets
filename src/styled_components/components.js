@@ -44,6 +44,21 @@ export const Nav = styled.nav`
   }
 `;
 
+export const MenuContainer = styled.section`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 10px gray;
+    position: fixed;
+    right: 0;
+    top: 8vh;
+    width: 150px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+`;
+
 export const LinksContainer = styled.section`
     display: flex;
     justify-content: space-evenly;
@@ -66,38 +81,53 @@ export const LinksContainer = styled.section`
 `;
 
  export const SearchContainer = styled.div`
-        width: 50%;
-        height: 50%;
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-        border: 1px solid gray;
-        border-radius: 5px;
-        box-shadow: 0 0 10px white;
+    width: 50%;
+    height: 50%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border: 1px solid gray;
+    border-radius: 5px;
+    box-shadow: 0 0 10px white;
 
-        input {
-            padding: 15px;
-            width: 90%;
-            border: none;
-            background: none;
+    input {
+        padding: 15px;
+        width: 90%;
+        border: none;
+        background: none;
+    }
+
+    input:focus {
+        outline: none;
+    }
+
+    button {
+        border: none;
+        background: none;
+        cursor: pointer;
+        width: 10%;
+        padding: 0;
+        margin: 0;
+
+        i {
+            color: gray;
         }
+    }
 
-        input:focus {
-            outline: none;
+    @media (max-width: 768px) {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        box-shadow: none;
+
+        input::placeholder {
+            color: black;
         }
-
-        button {
-            border: none;
-            background: none;
-            cursor: pointer;
-            width: 10%;
-            padding: 0;
-            margin: 0;
-
-            i {
-                color: gray;
-            }
+        
+        * {
+            color: white;
         }
+    }
 `;
 
 export const ResultsContainer = styled.div`
@@ -481,19 +511,36 @@ export const ButtonConainer = styled.div`
     justify-content: center;
     gap: 1vh;
     padding: 10px;
+`;
 
-    button {
-        border: none;
-        background: none;
-        background-image: linear-gradient(to right, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-        color: white;
-        font-size: 2vh;
-        border-radius: 5px;
-        box-shadow: 0 0 10px gray;
-        padding: 10px;
+export const Button = styled.button`
+    border: none;
+    background: none;
+    background-image: linear-gradient(to right, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    color: white;
+    font-size: 2vh;
+    border-radius: 5px;
+    box-shadow: 0 0 10px gray;
+    padding: 10px;
+
+    &:hover {
+        cursor: pointer;
+        box-shadow: 0 0 10px black;
     }
-    
-    button:hover {
+`;
+
+export const NavButton = styled.button`
+    border: none;
+    background: none;
+    background-image: linear-gradient(to right, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    color: white;
+    font-size: 2vh;
+    border-radius: 5px;
+    box-shadow: 0 0 10px gray;
+    padding: 10px;
+    width: 100%;
+
+    &:hover {
         cursor: pointer;
         box-shadow: 0 0 10px black;
     }
