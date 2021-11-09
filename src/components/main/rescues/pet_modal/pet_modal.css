@@ -33,6 +33,7 @@
     background: none;
     padding: 10px;
     z-index: 10;
+    font-size: 2.5vh;
 }
 
 .close:hover {

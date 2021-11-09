@@ -26,12 +26,12 @@ function Home() {
     return (
         <MainContainer>
             <Container>
-                <h1>Welcome to Sean's Pet Sanctuary!</h1>
+                <h1>Welcome to Sean's Pet Sanctuary</h1>
                 <SplitSection>
-                    <Image loading='eager' src={pets.length > 0 ? pets[petIndex]?.url : '/images/blur.jpeg'} alt={pets[petIndex]?.name} />
+                    <Image className='image' loading='eager' src={pets.length > 0 ? pets[petIndex]?.url : '/images/blur.jpeg'} alt={pets[petIndex]?.name} />
                     <p>
                         Hi! My name is Sean, I'm a software developer based outside of Philly and if there are 
-                        two things I love in this world, it's making websites and ANIMALS! This website is a place to rescue these
+                        two things I love in this world, they are making websites and ANIMALS! This website is a place to rescue these
                         beautiful beings from their cruel JSON cages. Hopefully we won't have to get Sarah McLachlan involved
                         and you can help us out!
                     </p>
@@ -43,7 +43,7 @@ function Home() {
                     </p>
                 </Container>
             </Container>
-            <Footer />
+            {/* <Footer /> */}
         </MainContainer>
     )
 }

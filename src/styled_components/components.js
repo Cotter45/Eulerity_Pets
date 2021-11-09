@@ -10,7 +10,7 @@ export const NavContainer = styled.section`
 `;
 
 export const Nav = styled.nav`
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.4);
   border-bottom: 1px solid #e6e6e6;
   display: flex;
   justify-content: space-around;
@@ -37,6 +37,17 @@ export const Nav = styled.nav`
       border-radius: 5px;
   }
 
+  button {
+      height: 60%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+
+  div {
+      height: 60%;
+  }
+
   @media (max-width: 750px) {
       justify-content: space-between;
       width: 90%;
@@ -57,6 +68,10 @@ export const MenuContainer = styled.section`
     background-color: white;
     border-radius: 5px;
     padding: 10px;
+
+    button {
+        width: 80%;
+    }
 `;
 
 export const LinksContainer = styled.section`
@@ -108,6 +123,7 @@ export const LinksContainer = styled.section`
         width: 10%;
         padding: 0;
         margin: 0;
+        font-size: 1vh;
 
         i {
             color: gray;
@@ -139,6 +155,10 @@ export const ResultsContainer = styled.div`
     justify-content: center;
     position: relative
     background-color: white;
+
+    button {
+        font-size: 1vh;
+    }
 `;
 
 export const SearchResult = styled.div`
@@ -248,13 +268,16 @@ export const SplitSection = styled.section`
         height: 60%;
         gap: 3vw;
 
-        img {
+        .image {
             width: 200px;
             height: 200px;
+            max-width: 50%;
+            max-height: 200px;
         }
 
         p {
             width: 100%;
+            line-height: 1.5;
         }
     }
     
@@ -270,7 +293,16 @@ export const SmallSplitSection = styled.section`
     max-height: 80%;
 
     p {
-        font-size: 3vh;
+        font-size: 2vh;
+        text-align: center;
+    }
+
+    button {
+        height: 40%;
+        width: 20%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     @media (max-width: 768px) {
@@ -371,19 +403,14 @@ export const FootContainer = styled.footer`
 export const FlexDiv = styled.div`
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     width: 80%;
     height: 100%;
-    gap: 1vh;
+    gap: 5vh;
     padding: 10px;
 
     h2 {
         text-decoration: underline;
-    }
-
-    button {
-        border: none;
-        background: none;
     }
 
     button:hover {
@@ -412,6 +439,7 @@ export const ColDiv = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    text-align: center;
     width: 60%;
     height: 100%;
     max-height: 60vh;
@@ -434,15 +462,17 @@ export const ColGrid = styled.section`
     width: 100%;
     height: 60vh;
     overflow-y: scroll;
-    padding: 10px;
+    padding: 20px;
     border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.6);
-
+    background-color: rgba(255, 255, 255, 0.2);
+    scrollbar-width: none;
+    
     ::-webkit-scrollbar {
         display: none;
     }
 
-    @media (max-width: 768px) {
+
+    @media (max-width: 900px) {
         grid-template-columns: 1fr;
         grid-template-rows: 1fr 1fr 1fr;
         gap: 1vh;
@@ -451,7 +481,7 @@ export const ColGrid = styled.section`
         overflow-y: scroll;
         padding: 10px;
         border-radius: 5px;
-        background-color: rgba(255, 255, 255, 0.6);
+        background-color: rgba(255, 255, 255, 0.2);
     }
 `;
 
@@ -459,17 +489,21 @@ export const Card = styled.section`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
     width: 90%;
     height: fit-content;
     height: 25vh;
     padding: 10px;
     border: 1px solid lightgray;
+    box-shadow: 5px 5px 10px gray;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.8);
 
     img {
         width: 100%;
-        max-height: 80%;
+        height: 80%;
         border-radius: 5px;
+        object-fit: cover;
     }
 
     div {
@@ -482,6 +516,8 @@ export const Card = styled.section`
     p {
         padding: 0;
         margin: 0;
+        width: 100%;
+        text-align: center;
     }
 
     &:hover {
@@ -516,17 +552,6 @@ export const Card = styled.section`
     }
 `;
 
-export const Overlay = styled.section`
-    disply: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    z-index: 1;
-`;
-
 export const MainDragnDropContainer = styled.main`
     display: flex;
     flex-direction: column;
@@ -552,35 +577,42 @@ export const ButtonConainer = styled.div`
 `;
 
 export const Button = styled.button`
-    border: none;
-    background: none;
-    background-image: linear-gradient(to right, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-    color: white;
     font-size: 2vh;
-    border-radius: 5px;
-    box-shadow: 0 0 10px gray;
-    padding: 10px;
+    color: #494949 !important;
+	text-transform: uppercase;
+	text-decoration: none;
+	background: #ffffff;
+	padding: 20px;
+	border: 4px solid #494949 !important;
+	display: inline-block;
+	transition: all 0.4s ease 0s;
 
     &:hover {
         cursor: pointer;
-        box-shadow: 0 0 10px black;
+        color: #ffffff !important;
+        background: #f6b93b;
+        border-color: #f6b93b !important;
+        transition: all 0.4s ease 0s;
     }
 `;
 
 export const NavButton = styled.button`
-    border: none;
-    background: none;
-    background-image: linear-gradient(to right, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-    color: white;
     font-size: 2vh;
-    border-radius: 5px;
-    box-shadow: 0 0 10px gray;
-    padding: 10px;
-    width: 100%;
+    color: #494949 !important;
+	text-transform: uppercase;
+	text-decoration: none;
+	background: #ffffff;
+	padding: 20px;
+	border: 4px solid #494949 !important;
+	display: inline-block;
+	transition: all 0.4s ease 0s;
 
     &:hover {
         cursor: pointer;
-        box-shadow: 0 0 10px black;
+        color: #ffffff !important;
+        background: #f6b93b;
+        border-color: #f6b93b !important;
+        transition: all 0.4s ease 0s;
     }
 `;
 

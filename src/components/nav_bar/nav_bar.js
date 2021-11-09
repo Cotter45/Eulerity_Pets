@@ -24,7 +24,8 @@ function NavBar() {
     return (
         <NavContainer>
             <Nav>
-                <h2 onClick={() => history.push('/')}>Home</h2>
+                <Button onClick={() => history.push('/')}>Home</Button>
+                {/* <h2 onClick={() => history.push('/')}>Home</h2> */}
                 {size.width > 750 && (
                     <>
                         <Search 
@@ -34,10 +35,14 @@ function NavBar() {
                             setResults={setResults} 
                             size={size}
                         />
-                        <LinksContainer>
+                        {/* <LinksContainer>
                             <NavLink className='navlink' activeClassName='active' to="/about">About</NavLink>
                             <NavLink className='navlink' activeClassName='active' to="/rescue">Rescue</NavLink>
-                        </LinksContainer>
+                        </LinksContainer> */}
+                        <ButtonConainer>
+                            <Button onClick={() => history.push('/about')}>About</Button>
+                            <Button onClick={() => history.push('/rescue')}>Rescue</Button>
+                        </ButtonConainer>
                     </>
                 )}
                 {size.width < 750 && (
