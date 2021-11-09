@@ -1,8 +1,8 @@
-import { useHistory, NavLink } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 
-import { Button, ButtonConainer, FlexDiv, LinksContainer, MenuContainer, Nav, NavButton, NavContainer, ResultsContainer, SearchResult } from "../../styled_components/components";
+import { Button, ButtonConainer, FlexDiv, MenuContainer, Nav, NavButton, NavContainer, ResultsContainer, SearchResult } from "../../styled_components/components";
 import Search from "./search/search";
 import useWindowSize from "../../util/window-size";
 
@@ -24,7 +24,8 @@ function NavBar() {
     return (
         <NavContainer>
             <Nav>
-                <h2 onClick={() => history.push('/')}>Home</h2>
+                <Button onClick={() => history.push('/')}>Home</Button>
+                {/* <h2 onClick={() => history.push('/')}>Home</h2> */}
                 {size.width > 750 && (
                     <>
                         <Search 
@@ -34,10 +35,10 @@ function NavBar() {
                             setResults={setResults} 
                             size={size}
                         />
-                        <LinksContainer>
-                            <NavLink className='navlink' activeClassName='active' to="/about">About</NavLink>
-                            <NavLink className='navlink' activeClassName='active' to="/rescue">Rescue</NavLink>
-                        </LinksContainer>
+                        <ButtonConainer>
+                            <Button onClick={() => history.push('/about')}>About</Button>
+                            <Button onClick={() => history.push('/rescue')}>Rescue</Button>
+                        </ButtonConainer>
                     </>
                 )}
                 {size.width < 750 && (
@@ -101,10 +102,3 @@ function NavBar() {
 }
 
 export default NavBar;
-
-// will use because most people will not be searching for a pet by name,
-    // this could reduce iterations by using the index
-    // const names = pets?.map(pet => pet.title);
-    // // will use because most people will search keywords,
-    // // will be easier to find the index of the pet
-    // const descriptions = pets?.map(pet => pet.description);

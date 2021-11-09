@@ -1,13 +1,17 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useDrop } from 'react-dnd';
 import update from 'immutability-helper';
-import { v4 as uuidv4 } from 'uuid';
+import { useHistory } from 'react-router-dom';
+import { saveAs } from 'file-saver';
 
-import { MainContainer, Container, SplitSection, ColDiv, SmallSplitSection, ColGrid, FlexDiv, MainDragnDropContainer, ButtonConainer, Button } from '../../../styled_components/components';
+import { SplitSection, SmallSplitSection, ColGrid, MainDragnDropContainer, ButtonConainer, Button } from '../../../styled_components/components';
 import PetCard from './pet_card';
+import { rescue_pet, save_pet } from '../../../store/pets';
 
 function Rescue() {
+    const dispatch = useDispatch();
+    const history = useHistory();
 
     const pets = useSelector(state => state.Pets_Data.pets);
 
@@ -17,14 +21,39 @@ function Rescue() {
     const [rescues, setRescues] = useState([]);
     // list of pets that want to be rescued
     const [nextTimers, setNextTimers] = useState([]);
+    // reminder to add to queue if no pets are in line and download selected
+    const [reminder, setReminder] = useState(false);
+    // notice if all pets are selected
+    const [notice, setNotice] = useState(false);
 
     useEffect(() => {
-        // need pets to be controlled by state, but not 
-        // updated if every pet is rescued
-        if (nextTimers.length || rescues.length) return;
-        setNextTimers(pets);
+        // need pets to be controlled by state, for drag and drop 
+        setNextTimers(pets.filter(pet => !pet.upForRescue));
         setPetsList(pets);
+        setRescues(pets.filter(pet => pet.upForRescue))
     }, [nextTimers.length, pets, rescues.length]);
+
+    // effect to make the reminder disappear after 5 seconds
+    useEffect(() => {
+        if (!reminder) return;
+
+        const timer = setTimeout(() => {
+            setReminder(false);
+        }, 5000);
+
+        return () => clearTimeout(timer);
+    }, [reminder]);
+    
+    // effect to make the notice disappear after 5 seconds
+    useEffect(() => {
+        if (!notice) return;
+
+        const timer = setTimeout(() => {
+            setNotice(false);
+        }, 5000);
+
+        return () => clearTimeout(timer);
+    }, [notice]);
 
     const moveCard = (dragIndex, hoverIndex, item) => {
         // find pet in complete list
@@ -57,9 +86,9 @@ function Rescue() {
     // function just for moving from nextTimer to rescue
     const rescue = (item) => {
         // find actual card to move
-        const dragCard = nextTimers.find(pet => pet.title === item.name);
+        const dragCard = nextTimers.find(pet => pet.title === item.name || pet.title === item.title);
         setRescues([...rescues, dragCard]);
-        setNextTimers(nextTimers.filter(pet => pet.title !== item.name));
+        setNextTimers(nextTimers.filter(pet => pet.title !== item.name || pet.title !== item.title));
     };
 
     const [{ isOverRescue }, queueRescue] = useDrop({
@@ -71,8 +100,8 @@ function Rescue() {
             const pet = nextTimers.find(pet => pet.title === item.name);
             if (pet) {
                 // make sure to mark pet in complete list as rescued
-                pet.upForRescue = true;
-                rescue(item);
+                dispatch(rescue_pet(pet))
+                rescue(pet);
             }            
         },
     });
@@ -80,8 +109,30 @@ function Rescue() {
     // function to clear all pets from rescue queue 
     function sorryGuys() {
         setRescues([]);
-        setNextTimers(petsList);
         petsList.forEach(pet => pet.upForRescue = false);
+        setNextTimers(petsList);
+    }
+
+    // handy package to handle downloads
+    // will download 1 at a time
+    function download(pets) {
+        if (pets.length === 0) return setReminder(true);
+        pets.forEach(pet => {
+            saveAs(pet.url, pet.title + '.jpg'); 
+            if (pet) {
+                setNextTimers(nextTimers.filter(timer => timer.title !== pet.title));
+                setRescues(rescues.filter(rescue => rescue.title !== pet.title));
+            }
+            dispatch(save_pet(pet));
+        })
+    }
+
+    // function to add all to rescue queue
+    function selectAll() {
+        if (nextTimers.length === 0) return setNotice(true);
+        setNextTimers([]);
+        petsList.forEach(pet => pet.upForRescue = true);
+        setRescues(petsList);
     }
 
 
@@ -89,9 +140,18 @@ function Rescue() {
         <MainDragnDropContainer>
             <h2>Drag and drop to queue the rescue!</h2>
             <ButtonConainer>
-                <Button>Rescue!</Button>
-                <Button onClick={sorryGuys}>Clear Queue</Button>
+                <Button onClick={() => {
+                    download(petsList);
+                    history.push('/about');
+                }}>Rescue All</Button>
+                <Button onClick={sorryGuys}>Not Today...</Button>
             </ButtonConainer>
+            <SmallSplitSection>
+                <Button onClick={selectAll}>Select All</Button>
+                <Button onClick={() => download(rescues)}>Bring Home</Button>
+            </SmallSplitSection>
+            {reminder && <h3 style={{color: 'red', textAlign: 'center'}}>Please add pets to queue before downloading</h3>}
+            {notice && <h3 style={{color: 'red', textAlign: 'center'}}>You've already selected everyone</h3>}
             <SplitSection>
                 <ColGrid>
                     {nextTimers.length > 0 && nextTimers.map((pet, index) => (
@@ -100,16 +160,25 @@ function Rescue() {
                             moveCard={moveCard} 
                             pet={pet} 
                             index={index} 
+                            nextTimers={nextTimers}
+                            setNextTimers={setNextTimers}
+                            rescues={rescues}
+                            setRescues={setRescues}
+                            rescue={rescue}
                         />
                         ))}
                 </ColGrid>
-                <ColGrid ref={queueRescue} style={{ boxShadow: isOverRescue ? '0px 5px 5px orange' : ''}}>
+                <ColGrid ref={queueRescue} style={{ backgroundImage: '/images/house.jpeg', boxShadow: isOverRescue ? '0px 5px 5px orange' : ''}}>
                     {rescues.length > 0 && rescues.map((pet, index) => (
                         <PetCard 
                             key={pet.title}
                             moveCard={moveCard} 
                             pet={pet} 
-                            index={index} 
+                            index={index}
+                            nextTimers={nextTimers}
+                            setNextTimers={setNextTimers}
+                            rescues={rescues}
+                            setRescues={setRescues} 
                         />
                     ))}
                 </ColGrid>

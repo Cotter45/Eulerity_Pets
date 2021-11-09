@@ -1,11 +1,11 @@
 import { useDrag, useDrop } from 'react-dnd';
 import { useRef, useState } from 'react';
 
-import { Card, Container, Image, Overlay } from "../../../styled_components/components";
+import { Card } from "../../../styled_components/components";
 import PetModal from './pet_modal';
 
 
-function PetCard({ pet, index, moveCard }) {
+function PetCard({ pet, index, moveCard, rescue, nextTimers, setNextTimers, rescues, setRescues }) {
 
     const ref = useRef(null);
     // going to use this to open modal when clicked
@@ -32,7 +32,7 @@ function PetCard({ pet, index, moveCard }) {
             const hoverMiddleY = (hoverBoundary.bottom - hoverBoundary.top) / 2;
             const hoverActualY = monitor.getClientOffset().y - hoverBoundary.top;
 
-            // only move card if it is not over the middle of the currentCard so 
+            // only move card if it is past the middle of the hoverCard so 
             // that it doesn't jump to the next card and flicker
             if (dragIndex < hoverIndex && hoverActualY < hoverMiddleY) return;
             if (dragIndex > hoverIndex && hoverActualY > hoverMiddleY) return;
@@ -55,10 +55,20 @@ function PetCard({ pet, index, moveCard }) {
             style={{ opacity: isDragging ? .1 : 1}}
             id='pet'
         >
-            <img loading='eager' src={pet.url} alt={pet.title} />
+            <img loading='lazy' src={pet.url} alt={pet.title} />
             <p>{pet.title}</p>
             {showModal && (
-                <PetModal index={index} pet={pet} setShowModal={setShowModal} showModal={showModal} />
+                <PetModal 
+                    rescue={rescue} 
+                    index={index} 
+                    pet={pet} 
+                    setShowModal={setShowModal} 
+                    showModal={showModal} 
+                    nextTimers={nextTimers}
+                    setNextTimers={setNextTimers}
+                    rescues={rescues}
+                    setRescues={setRescues}
+                />
             )}
         </Card>
     )

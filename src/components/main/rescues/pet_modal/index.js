@@ -6,13 +6,18 @@ import { Modal } from '../../../../context/Modal';
 
 import './pet_modal.css';
 
-function PetModal({ pet, showModal, setShowModal, index }) {
+function PetModal({ pet, showModal, setShowModal, index, rescue, nextTimers, setNextTimers, rescues, setRescues }) {
 
     const pets = useSelector(state => state.Pets_Data.pets);
 
     
     
-    const [petIndex, setPetIndex] = useState(index);
+    const [petIndex, setPetIndex] = useState('');
+
+    // set pet index after data loads
+    useEffect(() => {
+        setPetIndex(pets.indexOf(pet));
+    }, [index, pet, pets]);
 
     // checks for the target of the event so the modal doesnt close when 
     // trying to scroll pets and adds event listeners to close when 
@@ -54,13 +59,20 @@ function PetModal({ pet, showModal, setShowModal, index }) {
     <div>
       {showModal && (
         <Modal id='pet_modal'>
-            <button className='close'><i className="fas fa-times fa-2x"></i></button>
+            <button className='close'><i className="fas fa-times"></i></button>
             <div className='navigate'>
                 <button onClick={handleScrollDown}><i className="fas fa-arrow-left fa-2x"></i></button>
-                <h1>Scroll</h1>  
+                <h1>Browse</h1>  
                 <button onClick={handleScrollUp}><i className="fas fa-arrow-right fa-2x"></i></button>
             </div>
-            <PetProfile pet_from_modal={pets[petIndex]} />
+            <PetProfile 
+                rescue={rescue} 
+                pet_from_modal={pets[petIndex]} 
+                nextTimers={nextTimers}
+                setNextTimers={setNextTimers}
+                rescues={rescues}
+                setRescues={setRescues}
+                />
         </Modal>
       )}
     </div>
