@@ -55,7 +55,7 @@ function PetCard({ pet, index, moveCard, rescue, nextTimers, setNextTimers, resc
             style={{ opacity: isDragging ? .1 : 1}}
             id='pet'
         >
-            <img loading='eager' src={pet.url} alt={pet.title} />
+            <img loading='lazy' src={pet.url} alt={pet.title} />
             <p>{pet.title}</p>
             {showModal && (
                 <PetModal 
