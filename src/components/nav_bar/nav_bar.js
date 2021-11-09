@@ -33,7 +33,7 @@ function NavBar() {
                         />
                         <LinksContainer>
                             <NavLink className='navlink' activeClassName='active' to="/about">About</NavLink>
-                            <NavLink className='navlink' activeClassName='active' to="/rescue">Rescue</NavLink>
+                            <NavLink className='navlink' activeClassName='active' to="/rescue">Rescue Center</NavLink>
                         </LinksContainer>
                     </>
                 )}

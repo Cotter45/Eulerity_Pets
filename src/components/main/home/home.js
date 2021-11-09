@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router';
 
 
 import { get_pets } from '../../../store/pets';
@@ -8,7 +9,7 @@ import Footer from '../../footer/footer';
 
 function Home() {
     const dispatch = useDispatch();
-
+    const history = useHistory();
     
     // used for carousel of pets
     const [petIndex, setPetIndex] = useState(0);
@@ -39,7 +40,7 @@ function Home() {
                     </p>
                 </SplitSection>
                 <Container>
-                    <h1>Hello, {pets[petIndex]?.title}</h1>
+                    <h1 onClick={() => history.push(`/rescue/${pets[petIndex].title?.split(' ').join('').toLowerCase()}`)}>Hello, {pets[petIndex]?.title}</h1>
                     <p>
                         {pets[petIndex]?.description}
                     </p>

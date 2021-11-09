@@ -166,14 +166,23 @@ export const Container = styled.section`
 
     h2 {
         text-decoration: underline;
+        font-size: 3vw;
     }
     
     h1 {
-        font-size: 3vh;
+        font-size: 2vh;
+    }
+
+    h1:hover {
+        cursor: pointer;
     }
 
     @media (max-width: 768px) {
         font-size: 1.2vh;
+
+        h2 {
+            font-size: 2vh;
+        }
     }
 `;
 
@@ -188,8 +197,9 @@ export const SplitSection = styled.section`
 
     p {
         width: 50%;
-        // font-size: 1.8vh;
     }
+
+    
 `;
 
 export const SmallSplitSection = styled.section`
@@ -197,9 +207,20 @@ export const SmallSplitSection = styled.section`
     height: fit-content;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 1vw;
+    justify-content: space-evenly;
+    gap: 2vw;
     width: 100%;
+
+    p {
+        font-size: 2vh;
+    }
+
+    @media (max-width: 768px) {
+        gap: 5vw;
+        p {
+            font-size: 1.5vh;
+        }
+    }
 `;
 
 export const ListContainer = styled.article`
