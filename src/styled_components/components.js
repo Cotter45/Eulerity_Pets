@@ -189,7 +189,7 @@ export const MainContainer = styled.main`
     padding: 20px;
 
     @media (max-width: 768px) {
-        margin-top: 2vh;
+        margin-top: 0;
     }
 `;
 
@@ -403,7 +403,7 @@ export const FootContainer = styled.footer`
 export const FlexDiv = styled.div`
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     width: 80%;
     height: 100%;
     gap: 5vh;

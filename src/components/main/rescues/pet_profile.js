@@ -29,12 +29,10 @@ function PetProfile({ pet_from_modal, rescue, nextTimers, setNextTimers, rescues
     }, [pet]);
 
     // handy package to handle downloads
-    const download = async () => {
+    const download = () => {
         saveAs(pet.url, pet.title + '.jpg'); 
         if (pet_from_modal) {
-            console.log(nextTimers.length)
             setNextTimers(nextTimers.filter(timer => timer.title !== pet.title));
-            console.log(nextTimers.length)
             setRescues(rescues.filter(rescue => rescue.title !== pet.title));
         }
         dispatch(save_pet(pet));

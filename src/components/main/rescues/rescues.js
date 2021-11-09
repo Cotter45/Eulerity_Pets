@@ -2,11 +2,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useDrop } from 'react-dnd';
 import update from 'immutability-helper';
-import { v4 as uuidv4 } from 'uuid';
+import { saveAs } from 'file-saver';
 
-import { MainContainer, Container, SplitSection, ColDiv, SmallSplitSection, ColGrid, FlexDiv, MainDragnDropContainer, ButtonConainer, Button } from '../../../styled_components/components';
+
+import { SplitSection, SmallSplitSection, ColGrid, MainDragnDropContainer, ButtonConainer, Button } from '../../../styled_components/components';
 import PetCard from './pet_card';
-import { rescue_pet } from '../../../store/pets';
+import { rescue_pet, save_pet } from '../../../store/pets';
 
 function Rescue() {
     const dispatch = useDispatch();
@@ -19,15 +20,37 @@ function Rescue() {
     const [rescues, setRescues] = useState([]);
     // list of pets that want to be rescued
     const [nextTimers, setNextTimers] = useState([]);
+    // reminder to add to queue if no pets are in line and download selected
+    const [reminder, setReminder] = useState(false);
+    // notice if all pets are selected
+    const [notice, setNotice] = useState(false);
 
     useEffect(() => {
-        // need pets to be controlled by state, but not 
-        // updated if every pet is rescued
-        // if (nextTimers.length || rescues.length) return;
+        // need pets to be controlled by state, for drag and drop 
         setNextTimers(pets.filter(pet => !pet.upForRescue));
         setPetsList(pets);
         setRescues(pets.filter(pet => pet.upForRescue))
     }, [nextTimers.length, pets, rescues.length]);
+
+    useEffect(() => {
+        if (!reminder) return;
+
+        const timer = setTimeout(() => {
+            setReminder(false);
+        }, 5000);
+
+        return () => clearTimeout(timer);
+    }, [reminder]);
+    
+    useEffect(() => {
+        if (!notice) return;
+
+        const timer = setTimeout(() => {
+            setNotice(false);
+        }, 5000);
+
+        return () => clearTimeout(timer);
+    }, [notice]);
 
     const moveCard = (dragIndex, hoverIndex, item) => {
         // find pet in complete list
@@ -83,8 +106,30 @@ function Rescue() {
     // function to clear all pets from rescue queue 
     function sorryGuys() {
         setRescues([]);
-        setNextTimers(petsList);
         petsList.forEach(pet => pet.upForRescue = false);
+        setNextTimers(petsList);
+    }
+
+    // handy package to handle downloads
+    // will download 1 at a time
+    function download(pets) {
+        if (pets.length === 0) return setReminder(true);
+        pets.forEach(pet => {
+            saveAs(pet.url, pet.title + '.jpg'); 
+            if (pet) {
+                setNextTimers(nextTimers.filter(timer => timer.title !== pet.title));
+                setRescues(rescues.filter(rescue => rescue.title !== pet.title));
+            }
+            dispatch(save_pet(pet));
+        })
+    }
+
+    // function to add all to rescue queue
+    function selectAll() {
+        if (nextTimers.length === 0) return setNotice(true);
+        setNextTimers([]);
+        petsList.forEach(pet => pet.upForRescue = true);
+        setRescues(petsList);
     }
 
 
@@ -96,9 +141,11 @@ function Rescue() {
                 <Button onClick={sorryGuys}>Not Today...</Button>
             </ButtonConainer>
             <SmallSplitSection>
-                <Button>Select All</Button>
-                <Button>Bring Home</Button>
+                <Button onClick={selectAll}>Select All</Button>
+                <Button onClick={() => download(rescues)}>Bring Home</Button>
             </SmallSplitSection>
+            {reminder && <h3 style={{color: 'red', textAlign: 'center'}}>Please add pets to queue before downloading</h3>}
+            {notice && <h3 style={{color: 'red', textAlign: 'center'}}>You've already selected everyone</h3>}
             <SplitSection>
                 <ColGrid>
                     {nextTimers.length > 0 && nextTimers.map((pet, index) => (
