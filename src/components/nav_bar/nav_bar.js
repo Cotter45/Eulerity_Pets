@@ -1,8 +1,8 @@
-import { useHistory } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useHistory, NavLink } from "react-router-dom";
+import { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 
-import { FlexDiv, Nav, NavContainer, ResultsContainer, SearchResult } from "../../styled_components/components";
+import { FlexDiv, LinksContainer, Nav, NavContainer, ResultsContainer, SearchResult } from "../../styled_components/components";
 import Search from "./search/search";
 import useWindowSize from "../../util/window-size";
 
@@ -31,9 +31,10 @@ function NavBar() {
                             setParams={setParams} 
                             setResults={setResults} 
                         />
-                        <section>
-                            router links
-                        </section>
+                        <LinksContainer>
+                            <NavLink className='navlink' activeClassName='active' to="/about">About</NavLink>
+                            <NavLink className='navlink' activeClassName='active' to="/rescue">Rescue</NavLink>
+                        </LinksContainer>
                     </>
                 )}
                 {size.width < 750 && (
@@ -46,10 +47,10 @@ function NavBar() {
                         <h2>Search Results</h2>
                         <button onClick={() => {
                             setParams('');
-                            setSearch(false)
+                            setSearch(false);
                         }}><i className="fas fa-times fa-2x"></i></button>
                     </FlexDiv>
-                    {results.length > 0 && results.map(result => (
+                    {results.length > 0 && results.map((result, index) => (
                         <SearchResult
                             onClick={() => {
                                 setParams('');
