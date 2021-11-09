@@ -4,7 +4,7 @@ import { useDrop } from 'react-dnd';
 import update from 'immutability-helper';
 import { v4 as uuidv4 } from 'uuid';
 
-import { MainContainer, Container, SplitSection, ColDiv, SmallSplitSection, ColGrid, FlexDiv, MainDragnDropContainer, ButtonConainer } from '../../../styled_components/components';
+import { MainContainer, Container, SplitSection, ColDiv, SmallSplitSection, ColGrid, FlexDiv, MainDragnDropContainer, ButtonConainer, Button } from '../../../styled_components/components';
 import PetCard from './pet_card';
 
 function Rescue() {
@@ -89,8 +89,8 @@ function Rescue() {
         <MainDragnDropContainer>
             <h2>Drag and drop to queue the rescue!</h2>
             <ButtonConainer>
-                <button>Rescue!</button>
-                <button onClick={sorryGuys}>Clear Queue</button>
+                <Button>Rescue!</Button>
+                <Button onClick={sorryGuys}>Clear Queue</Button>
             </ButtonConainer>
             <SplitSection>
                 <ColGrid>
