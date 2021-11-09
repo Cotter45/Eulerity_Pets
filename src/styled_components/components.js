@@ -387,16 +387,30 @@ export const ColDiv = styled.div`
 
 export const Card = styled.section`
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     width: 90%;
+    height: fit-content;
     height: 25vh;
     padding: 10px;
 
     img {
         width: 100%;
-        max-height: 100%;
+        max-height: 80%;
         border-radius: 5px;
+    }
+
+    div {
+        display: none;
+        position: absolute;
+        z-index: 1;
+        width: 80%;
+    }
+
+    p {
+        padding: 0;
+        margin: 0;
     }
 
     &:hover {
@@ -405,6 +419,17 @@ export const Card = styled.section`
         box-shadow: 0 0 10px gray;
         border-radius: 5px;
     }
+`;
+
+export const Overlay = styled.section`
+    disply: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 1;
 `;
 
 

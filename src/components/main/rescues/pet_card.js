@@ -1,12 +1,15 @@
 import { useDrag, useDrop } from 'react-dnd';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
-import { Card, Container, Image } from "../../../styled_components/components";
+import { Card, Container, Image, Overlay } from "../../../styled_components/components";
+import PetModal from './pet_modal';
 
 
 function PetCard({ pet, index, moveCard }) {
 
     const ref = useRef(null);
+    // going to use this to open modal when clicked
+    const [showModal, setShowModal] = useState(false);
 
     const [{ isDragging }, drag] = useDrag({
         type: 'pet',
@@ -30,7 +33,7 @@ function PetCard({ pet, index, moveCard }) {
             const hoverActualY = monitor.getClientOffset().y - hoverBoundary.top;
 
             // only move card if it is not over the middle of the currentCard so 
-            // that it doesn't jump to the next card
+            // that it doesn't jump to the next card and flicker
             if (dragIndex < hoverIndex && hoverActualY < hoverMiddleY) return;
             if (dragIndex > hoverIndex && hoverActualY > hoverMiddleY) return;
 
@@ -46,8 +49,17 @@ function PetCard({ pet, index, moveCard }) {
     drag(drop(ref));
 
     return (
-        <Card ref={ref} style={{ opacity: isDragging ? .1 : 1}}>
+        <Card 
+            ref={ref} 
+            onClick={() => setShowModal(true)}
+            style={{ opacity: isDragging ? .1 : 1}}
+            id='pet'
+        >
             <img loading='eager' src={pet.url} alt={pet.title} />
+            <p>{pet.title}</p>
+            {showModal && (
+                <PetModal index={index} pet={pet} setShowModal={setShowModal} showModal={showModal} />
+            )}
         </Card>
     )
 }
