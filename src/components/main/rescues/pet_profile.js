@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
-import { Container, Image, MainContainer, SmallSplitSection, SplitSection } from '../../../styled_components/components';
+import { ButtonConainer, Container, Image, MainContainer, SmallSplitSection, SplitSection } from '../../../styled_components/components';
 
 function PetProfile({ pet_from_modal }) {
     const { name } = useParams();
@@ -25,6 +25,10 @@ function PetProfile({ pet_from_modal }) {
                     </SmallSplitSection>
                 </Container>
             )}
+            <ButtonConainer>
+                <button>Take me home!</button>
+                <button>Add to rescue!</button>
+            </ButtonConainer>
         </MainContainer>
     )
 }

@@ -4,7 +4,7 @@ import { useDrop } from 'react-dnd';
 import update from 'immutability-helper';
 import { v4 as uuidv4 } from 'uuid';
 
-import { MainContainer, Container, SplitSection, ColDiv, SmallSplitSection, ColGrid, FlexDiv } from '../../../styled_components/components';
+import { MainContainer, Container, SplitSection, ColDiv, SmallSplitSection, ColGrid, FlexDiv, MainDragnDropContainer, ButtonConainer } from '../../../styled_components/components';
 import PetCard from './pet_card';
 
 function Rescue() {
@@ -75,15 +75,24 @@ function Rescue() {
                 rescue(item);
             }            
         },
-    })
+    });
+
+    // function to clear all pets from rescue queue 
+    function sorryGuys() {
+        setRescues([]);
+        setNextTimers(petsList);
+        petsList.forEach(pet => pet.upForRescue = false);
+    }
 
 
     return (
-        <MainContainer>
+        <MainDragnDropContainer>
             <h2>Drag and drop to queue the rescue!</h2>
-            <button>Rescue!</button>
-            <button>Clear Queue</button>
-            <SmallSplitSection>
+            <ButtonConainer>
+                <button>Rescue!</button>
+                <button onClick={sorryGuys}>Clear Queue</button>
+            </ButtonConainer>
+            <SplitSection>
                 <ColGrid>
                     {nextTimers.length > 0 && nextTimers.map((pet, index) => (
                         <PetCard 
@@ -104,8 +113,8 @@ function Rescue() {
                         />
                     ))}
                 </ColGrid>
-            </SmallSplitSection>
-        </MainContainer>
+            </SplitSection>
+        </MainDragnDropContainer>
     )
 }
 

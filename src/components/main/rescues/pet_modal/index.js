@@ -32,6 +32,7 @@ function PetModal({ pet, showModal, setShowModal, index }) {
         }
     }, [showModal, setShowModal]);
 
+    // increments pet index to display next pet in pet list
     const handleScrollUp = () => {
         if (petIndex === pets.length - 1) {
             setPetIndex(0);
@@ -40,6 +41,7 @@ function PetModal({ pet, showModal, setShowModal, index }) {
         }
     }
 
+    // decrements pet index to display previous pet in pet list
     const handleScrollDown = () => {
         if (petIndex === 0) {
             setPetIndex(pets.length - 1);

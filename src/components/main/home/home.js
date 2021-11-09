@@ -36,8 +36,8 @@ function Home() {
                         and you can help us out!
                     </p>
                 </SplitSection>
-                <Container>
-                    <h1 onClick={() => history.push(`/rescue/${pets[petIndex].title?.split(' ').join('').toLowerCase()}`)}>Hello, {pets[petIndex]?.title}</h1>
+                <Container className='description-box'>
+                    <h2 onClick={() => history.push(`/rescue/${pets[petIndex].title?.split(' ').join('').toLowerCase()}`)}>Hello, {pets[petIndex]?.title}</h2>
                     <p>
                         {pets[petIndex]?.description}
                     </p>

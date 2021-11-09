@@ -130,12 +130,13 @@ export const MainContainer = styled.main`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    margin-top: 10vh;
+    justify-content: center;
+    margin-top: 5vh;
     width: 100%;
+    height: 55vh;
     max-width: 1400px;
-    height: 100%;
     gap: 2vh;
+    padding: 20px;
 
     @media (max-width: 768px) {
         margin-top: 2vh;
@@ -148,33 +149,37 @@ export const Container = styled.section`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 0 auto;
-    width: 80%;
-    height: fit-content;
+    width: 75%;
+    height: 100%;
+    // max-height: 100%;
     background-color: rgba(255, 255, 255, 0.6);
-    padding: 20px;
+    padding: 20px;;
     border-radius: 5px;
     font-size: 1.5vh;
     text-align: left;
-    line-height: 1.5;
-    gap: 1vh;
+    line-height: 1.2;
+    gap: 2vh;
     box-shadow: 10px 5px 10px gray;
 
     * {
         margin: 0;
     }
 
-    h2 {
-        text-decoration: underline;
-        font-size: 3vw;
-    }
-    
-    h1 {
-        font-size: 2vh;
+    .description-box {
+        max-height: 150px;
     }
 
-    h1:hover {
+    h2 {
+        text-decoration: underline;
+        font-size: 2vw;
+    }
+    
+    h2:hover {
         cursor: pointer;
+    }
+
+    h1 {
+        font-size: 3vh;
     }
 
     @media (max-width: 768px) {
@@ -182,6 +187,10 @@ export const Container = styled.section`
 
         h2 {
             font-size: 2vh;
+        }
+
+        h1 {
+            font-size: 3.5vw;
         }
     }
 `;
@@ -192,33 +201,54 @@ export const SplitSection = styled.section`
     align-items: center;
     justify-content: space-evenly;
     gap: 5vw;
-    width: 100%;
-    height: 40vh;
+    width: 80%;
+    height: 75%;
+
+    img {
+        max-width: 400px;
+        max-height: 300px;
+    }
 
     p {
         width: 50%;
     }
 
+    @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        gap: 3vw;
+
+        img {
+            width: 200px;
+            height: 200px;
+        }
+
+        p {
+            width: 100%;
+        }
+    }
     
 `;
 
 export const SmallSplitSection = styled.section`
     width: 100%;
-    height: fit-content;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     gap: 2vw;
-    width: 100%;
     border-radius: 5px;
-    max-height: 75vh;
+    max-height: 80%;
 
     p {
-        font-size: 2vh;
+        font-size: 3vh;
     }
 
     @media (max-width: 768px) {
         gap: 5vw;
+
         p {
             font-size: 1.5vh;
         }
@@ -278,10 +308,11 @@ export const ListContainer = styled.article`
 
 export const Image = styled.img`
     width: 50%;
-    height: 80%;
+    height: auto;
+    max-width: 500px;
+    max-height: 400px;
     border-radius: 5px;
     box-shadow: 10px 5px 10px gray;
-    transition: all 2s ease;
 `;
 
 export const FootContainer = styled.footer`
@@ -394,6 +425,7 @@ export const Card = styled.section`
     height: fit-content;
     height: 25vh;
     padding: 10px;
+    border: 1px solid lightgray;
 
     img {
         width: 100%;
@@ -415,7 +447,6 @@ export const Card = styled.section`
 
     &:hover {
         cursor: pointer;
-        border: 1px solid gray;
         box-shadow: 0 0 10px gray;
         border-radius: 5px;
     }
@@ -430,6 +461,42 @@ export const Overlay = styled.section`
     height: 100%;
     position: absolute;
     z-index: 1;
+`;
+
+export const MainDragnDropContainer = styled.main`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    gap: 1vh;
+    padding: 10px;
+    border-radius: 5px;
+`;
+
+export const ButtonConainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1vh;
+    padding: 10px;
+
+    button {
+        border: none;
+        background: none;
+        background-image: linear-gradient(to right, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+        color: white;
+        font-size: 2vh;
+        border-radius: 5px;
+        box-shadow: 0 0 10px gray;
+        padding: 10px;
+    }
+    
+    button:hover {
+        cursor: pointer;
+        box-shadow: 0 0 10px black;
+    }
 `;
 
 
