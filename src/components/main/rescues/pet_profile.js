@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { saveAs } from 'file-saver';
 
-import { Button, ButtonConainer, Container, Image, MainContainer, SmallSplitSection, SplitSection } from '../../../styled_components/components';
+import { Button, ButtonConainer, Container, Image, MainContainer, SmallSplitSection } from '../../../styled_components/components';
 import { rescue_pet, save_pet } from '../../../store/pets';
 
 function PetProfile({ pet_from_modal, rescue, nextTimers, setNextTimers, rescues, setRescues }) {

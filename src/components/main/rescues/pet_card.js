@@ -19,7 +19,7 @@ function PetCard({ pet, index, moveCard, rescue, nextTimers, setNextTimers, resc
         }),
     })
 
-    const [{ isOver }, drop] = useDrop({
+    const [, drop] = useDrop({
         accept: 'pet',
         hover(item, monitor) {
             if (!ref.current) return;
